@@ -1,0 +1,6 @@
+Top 5 Most Important Features for Loan Approval:
+Credit_History: 0.4988
+Education: 0.0503
+Total_Income: 0.0498
+Property_Area: 0.0453
+ApplicantIncome: 0.0436

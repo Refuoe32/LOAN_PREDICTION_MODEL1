@@ -1,0 +1,39 @@
+# Model Creation Details
+
+ ## Model Selection
+ XGBoost was chosen due to its:
+ - Robustness with tabular data
+ - Handling of imbalanced datasets
+ - Feature importance insights for identifying key attributes
+ - Internal handling of missing values
+
+ ## Preprocessing
+ - Created Total_Income, Income_Ratio, and Loan_Term_Ratio features
+ - Encoded categorical variables using LabelEncoder
+ - Scaled numerical features with StandardScaler
+ - Removed outliers using IQR method
+ - Handled missing values: mode for categorical, median for numerical
+ - Saved preprocessed training and testing datasets as `train_data_preprocessed.csv` and `test_data_preprocessed.csv`
+
+ ## Training
+ - Split data: 80% train, 20% test (randomized with random_state=42)
+ - Used XGBClassifier with logloss evaluation metric
+
+ ## Tuning
+ - GridSearchCV with parameters:
+   - n_estimators: [100, 200, 300]
+   - max_depth: [3, 5, 7, 9]
+   - learning_rate: [0.01, 0.1, 0.3, 0.5]
+   - subsample: [0.7, 0.8, 0.9]
+   - colsample_bytree: [0.7, 0.8, 0.9]
+ - Best parameters saved in `model_performance.txt`
+
+ ## Feature Importance
+ - Analyzed feature importance to identify attributes most critical for loan approval
+ - Top 5 features saved in `feature_importance_scores.txt`
+ - Visualization of top 10 features in `outputs/feature_importance.png`
+
+ ## Evaluation
+ - Initial and tuned accuracies saved in `model_performance.txt`
+ - Visualizations: loan status distribution, applicant income, loan amount vs. status, credit history vs. status, confusion matrix, feature importance
+ 

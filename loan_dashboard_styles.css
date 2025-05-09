@@ -1,0 +1,170 @@
+/* Main page styling */
+.main {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+}
+
+/* Header styling */
+.css-10trblm {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #3498db;
+}
+
+/* Subheader styling */
+.css-qrbaxs {
+    color: #34495e;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+    border-left: 4px solid #3498db;
+}
+
+/* Card-like containers */
+.stBlock {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+/* Button styling */
+.stButton>button {
+    background-color: #3498db;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s;
+}
+
+.stButton>button:hover {
+    background-color: #2980b9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Selectbox styling */
+.stSelectbox>div>div {
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Number input styling */
+.stNumberInput>div>div>input {
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Column containers */
+.column-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+/* Feature importance item */
+.feature-item {
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    background-color: #f1f8fe;
+    border-left: 3px solid #3498db;
+}
+
+/* Prediction result */
+.prediction-approved {
+    padding: 1rem;
+    background-color: #d4edda;
+    color: #155724;
+    border-radius: 4px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.prediction-rejected {
+    padding: 1rem;
+    background-color: #f8d7da;
+    color: #721c24;
+    border-radius: 4px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Metrics styling */
+.metric-container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+/* Custom tabs for visualizations */
+.viz-tab {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background-color: #f1f1f1;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    margin-right: 0.25rem;
+}
+
+.viz-tab.active {
+    background-color: white;
+    font-weight: 600;
+}
+
+.tab-content {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0 4px 4px 4px;
+}
+
+/* Title banner */
+.title-banner {
+    background: linear-gradient(90deg, #3498db, #2c3e50);
+    padding: 1.5rem;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* For the model metrics */
+.model-metrics {
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0;
+}
+
+/* Footer styling */
+.footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    color: #6c757d;
+    font-size: 0.85rem;
+}
