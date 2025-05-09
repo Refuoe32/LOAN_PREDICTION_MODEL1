@@ -43,7 +43,7 @@
  - Libraries: pandas, numpy, sklearn, xgboost, matplotlib, seaborn, joblib, streamlit
 
  ## Team
- [Your Group Member Names and IDs]
+ [REFUOE,SELLO,RAMONE,MOSOLOLI,HEQOA]
 
  ## License
  MIT License
