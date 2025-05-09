@@ -45,6 +45,4 @@
  ## Team
  [REFUOE,SELLO,RAMONE,MOSOLOLI,HEQOA]
 
- ## License
- MIT License
  
