@@ -101,38 +101,69 @@ def load_and_clean_data():
 
 # Task 2: Data Preprocessing
 def preprocess_data(df):
+    # Make a copy to preserve original data
+    df_processed = df.copy()
+
     # a. Feature Extraction
-    df['Total_Income'] = df['ApplicantIncome'] + df['CoapplicantIncome']
-    df['Income_Ratio'] = df['ApplicantIncome'] / df['Total_Income'].replace(0, 1)
-    df['Loan_Term_Ratio'] = df['LoanAmount'] / df['Loan_Amount_Term'].replace(0, 1)
+    df_processed['Total_Income'] = df_processed['ApplicantIncome'] + df_processed['CoapplicantIncome']
+    df_processed['Income_Ratio'] = df_processed['ApplicantIncome'] / df_processed['Total_Income'].replace(0, 1)
+    df_processed['Loan_Term_Ratio'] = df_processed['LoanAmount'] / df_processed['Loan_Amount_Term'].replace(0, 1)
+
+    # Save a copy of the unencoded data with new features (before encoding)
+    if 'Loan_ID' in df_processed.columns:
+        df_with_features = df_processed.copy()
+        df_with_features.to_csv('outputs/data_with_features_pre_encoding.csv', index=False)
+        print("\nData with added features before encoding saved to 'outputs/data_with_features_pre_encoding.csv'")
 
     # b. Feature Encoding
     le = LabelEncoder()
     categorical_cols = ['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'Property_Area', 'Loan_Status']
-    for col in categorical_cols:
-        df[col] = le.fit_transform(df[col])
 
-    # Dropping Loan_ID
-    if 'Loan_ID' in df.columns:
-        df = df.drop('Loan_ID', axis=1)
+    # Create encoders dictionary to store for future use
+    encoders = {}
+    for col in categorical_cols:
+        encoders[col] = LabelEncoder()
+        df_processed[col] = encoders[col].fit_transform(df_processed[col])
+
+    # Save encoders for future use
+    joblib.dump(encoders, 'outputs/label_encoders.pkl')
+    print("\nLabel encoders saved to 'outputs/label_encoders.pkl'")
+
+    # Dropping Loan_ID if present
+    if 'Loan_ID' in df_processed.columns:
+        df_processed = df_processed.drop('Loan_ID', axis=1)
+
+    # Save a copy of the data after encoding but before scaling
+    df_processed.to_csv('outputs/data_encoded_pre_scaling.csv', index=False)
+    print("\nEncoded data before scaling saved to 'outputs/data_encoded_pre_scaling.csv'")
 
     # Scaling numerical features
     scaler = StandardScaler()
     numerical_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Total_Income',
                       'Income_Ratio', 'Loan_Term_Ratio']
-    df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
 
-    return df, scaler, numerical_cols
+    # Fit scaler and transform
+    df_processed[numerical_cols] = scaler.fit_transform(df_processed[numerical_cols])
+
+    # Save scaler for future use
+    joblib.dump(scaler, 'outputs/numerical_scaler.pkl')
+    print("\nNumerical scaler saved to 'outputs/numerical_scaler.pkl'")
+
+    # Save the fully preprocessed dataset
+    df_processed.to_csv('outputs/full_preprocessed_data.csv', index=False)
+    print("\nFully preprocessed data saved to 'outputs/full_preprocessed_data.csv'")
+
+    return df_processed, scaler, numerical_cols
 
 
 # Train model and save all necessary files
 def train_and_save_model():
     df = load_and_clean_data()
-    df, scaler, numerical_cols = preprocess_data(df)
+    df_processed, scaler, numerical_cols = preprocess_data(df)
 
     # Splitting features and target
-    X = df.drop('Loan_Status', axis=1)
-    y = df['Loan_Status']
+    X = df_processed.drop('Loan_Status', axis=1)
+    y = df_processed['Loan_Status']
 
     # Randomly splitting data - 80% training, 20% testing
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -198,6 +229,14 @@ def train_and_save_model():
     for feature, score in top_features.items():
         print(f"{feature}: {score:.4f}")
 
+    # Save feature importance to CSV
+    feature_importance_df = pd.DataFrame({
+        'Feature': feature_importance.index,
+        'Importance': feature_importance.values
+    }).sort_values('Importance', ascending=False)
+    feature_importance_df.to_csv('outputs/feature_importance.csv', index=False)
+    print("\nFeature importance saved to 'outputs/feature_importance.csv'")
+
     # Visualization: Feature Importance
     plt.figure(figsize=(10, 6))
     feature_importance.nlargest(10).plot(kind='barh')
@@ -231,7 +270,7 @@ def train_and_save_model():
     readme_content = """# Loan Prediction System
 
  ## Project Overview
- This project develops a machine learning model to predict loan approval outcomes for Motz Financial Services. The model uses applicant data such as gender, marital status, income, and credit history to determine loan eligibility. A key focus is identifying the most important features influencing loan approval. Preprocessed training and testing datasets are saved for inspection.
+ This project develops a machine learning model to predict loan approval outcomes for Motz Financial Services. The model uses applicant data such as gender, marital status, income, and credit history to determine loan eligibility. A key focus is identifying the most important features influencing loan approval. Preprocessed datasets are saved at each step of the processing pipeline.
 
  ## Dataset
  The dataset (`loan_data_set.csv`) contains applicant details and loan status. Key features include:
@@ -254,11 +293,17 @@ def train_and_save_model():
  - `loan_prediction_model.py`: Main script for model training and dashboard
  - `loan_dashboard_styles.css`: CSS styles for the Streamlit dashboard
  - `loan_prediction_model.pkl`: Trained XGBoost model
+ - `full_preprocessed_data.csv`: Complete preprocessed dataset
+ - `data_with_features_pre_encoding.csv`: Dataset with created features before encoding
+ - `data_encoded_pre_scaling.csv`: Dataset after encoding but before scaling
  - `train_data_preprocessed.csv`: Preprocessed 80% training dataset
  - `test_data_preprocessed.csv`: Preprocessed 20% testing dataset
  - `test_predictions.csv`: Test set predictions
  - `model_performance.txt`: Model accuracy and parameters
  - `feature_importance_scores.txt`: Top feature importance scores
+ - `feature_importance.csv`: Complete feature importance rankings
+ - `label_encoders.pkl`: Saved label encoders for categorical variables
+ - `numerical_scaler.pkl`: Saved scaler for numerical features
  - `model_details.txt`: Model creation details
  - Visualization images in `outputs/`
 
@@ -267,7 +312,7 @@ def train_and_save_model():
  2. Run the script: `streamlit run loan_prediction_model.py`
  3. Open the displayed URL in a browser to view the dashboard.
  4. Use the trained model for predictions with `joblib.load('loan_prediction_model.pkl')`.
- 5. Inspect preprocessed datasets in `outputs/train_data_preprocessed.csv` and `outputs/test_data_preprocessed.csv`.
+ 5. Inspect preprocessed datasets in the outputs directory.
 
  ## Requirements
  - Python 3.8+
@@ -298,7 +343,11 @@ def train_and_save_model():
  - Scaled numerical features with StandardScaler
  - Removed outliers using IQR method
  - Handled missing values: mode for categorical, median for numerical
- - Saved preprocessed training and testing datasets as `train_data_preprocessed.csv` and `test_data_preprocessed.csv`
+ - Saved preprocessed datasets at each major processing step:
+   - data_with_features_pre_encoding.csv: After feature creation but before encoding
+   - data_encoded_pre_scaling.csv: After encoding but before scaling
+   - full_preprocessed_data.csv: After all preprocessing steps
+   - train_data_preprocessed.csv and test_data_preprocessed.csv: Train/test split data
 
  ## Training
  - Split data: 80% train, 20% test (randomized with random_state=42)
@@ -315,12 +364,18 @@ def train_and_save_model():
 
  ## Feature Importance
  - Analyzed feature importance to identify attributes most critical for loan approval
+ - Complete feature importance rankings saved in `feature_importance.csv`
  - Top 5 features saved in `feature_importance_scores.txt`
  - Visualization of top 10 features in `outputs/feature_importance.png`
 
  ## Evaluation
  - Initial and tuned accuracies saved in `model_performance.txt`
  - Visualizations: loan status distribution, applicant income, loan amount vs. status, credit history vs. status, confusion matrix, feature importance
+
+ ## Saved Artifacts
+ - label_encoders.pkl: Label encoders for categorical variables
+ - numerical_scaler.pkl: StandardScaler for numerical variables
+ - loan_prediction_model.pkl: Trained and tuned XGBoost model
  """
     with open('outputs/model_details.txt', 'w') as f:
         f.write(model_details)
@@ -376,7 +431,7 @@ def run_dashboard():
       """, unsafe_allow_html=True)
 
     # Dashboard tabs
-    tab1, tab2, tab3 = st.tabs(["📊 Model Insights", "🔮 Prediction Tool", "📈 Visualizations"])
+    tab1, tab2, tab3, tab4 = st.tabs(["📊 Model Insights", "🔮 Prediction Tool", "📈 Visualizations", "🔍 Data Explorer"])
 
     with tab1:
         # Model metrics section
@@ -497,8 +552,9 @@ def run_dashboard():
             })
 
             # Get scaler for numerical columns
-            df = load_and_clean_data()
-            _, scaler, numerical_cols = preprocess_data(df)
+            scaler = joblib.load('outputs/numerical_scaler.pkl')
+            numerical_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Total_Income',
+                              'Income_Ratio', 'Loan_Term_Ratio']
 
             # Transform numerical columns
             input_data[numerical_cols] = scaler.transform(input_data[numerical_cols])
@@ -537,7 +593,7 @@ def run_dashboard():
             ax.add_patch(plt.Rectangle((0, 0), 1, 0.2, color='lightgray', alpha=0.5))
 
             # Draw the gauge value
-            if approval_probability <=0.33:
+            if approval_probability <= 0.33:
                 color = gauge_colors[0]
             elif approval_probability <= 0.66:
                 color = gauge_colors[1]
@@ -550,7 +606,7 @@ def run_dashboard():
             ax.set_xlim(0, 1)
             ax.set_ylim(0, 0.3)
             ax.set_xticks([0, 0.33, 0.66, 1])
-            ax.set_xticklabels(['0%','33%', '66%', '100%'])
+            ax.set_xticklabels(['0%', '33%', '66%', '100%'])
             ax.set_yticks([])
 
             # Add a title

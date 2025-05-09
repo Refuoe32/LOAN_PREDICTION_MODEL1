@@ -1,170 +1,325 @@
-/* Main page styling */
-.main {
-    background-color: #f8f9fa;
-    padding: 1.5rem;
+/* Modern dashboard styling for Motz Financial Services */
+:root {
+  --primary: #1e88e5;
+  --primary-light: #e3f2fd;
+  --primary-dark: #0d47a1;
+  --success: #2e7d32;
+  --success-light: #e8f5e9;
+  --warning: #ff9800;
+  --danger: #d32f2f;
+  --danger-light: #ffebee;
+  --text-primary: #263238;
+  --text-secondary: #546e7a;
+  --background: #f5f7fa;
+  --card-bg: #ffffff;
+  --border-radius: 8px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Header styling */
-.css-10trblm {
-    color: #2c3e50;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #3498db;
+/* Global styling */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
 }
 
-/* Subheader styling */
-.css-qrbaxs {
-    color: #34495e;
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-    padding-left: 0.5rem;
-    border-left: 4px solid #3498db;
+/* Header and main containers */
+.main .block-container {
+  padding: 2rem 1.5rem;
+  max-width: 1200px;
 }
 
-/* Card-like containers */
-.stBlock {
-    background-color: white;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
+/* Dashboard title */
+.title-banner {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  color: white;
+  text-align: center;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Button styling */
-.stButton>button {
-    background-color: #3498db;
-    color: white;
-    font-weight: 600;
-    border: none;
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
-    transition: all 0.3s;
+.title-banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(255,255,255,0.05)' fill-rule='evenodd'/%3E%3C/svg%3E") repeat;
+  opacity: 0.5;
 }
 
-.stButton>button:hover {
-    background-color: #2980b9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.title-banner h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Selectbox styling */
-.stSelectbox>div>div {
-    background-color: white;
-    border-radius: 4px;
-    border: 1px solid #e0e0e0;
+.title-banner h2 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  opacity: 0.9;
 }
 
-/* Number input styling */
-.stNumberInput>div>div>input {
-    border-radius: 4px;
-    border: 1px solid #e0e0e0;
+/* Tabs styling */
+.stTabs [data-baseweb="tab-list"] {
+  gap: 10px;
+  background-color: transparent;
 }
 
-/* Column containers */
-.column-container {
-    background-color: white;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
+.stTabs [data-baseweb="tab"] {
+  height: 50px;
+  white-space: pre-wrap;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  border: none;
+  padding: 0 20px;
+  font-weight: 500;
 }
 
-/* Feature importance item */
-.feature-item {
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-bottom: 0.5rem;
-    background-color: #f1f8fe;
-    border-left: 3px solid #3498db;
+.stTabs [aria-selected="true"] {
+  background-color: white !important;
+  color: var(--primary) !important;
+  border-top: 3px solid var(--primary);
+  font-weight: 600;
 }
 
-/* Prediction result */
-.prediction-approved {
-    padding: 1rem;
-    background-color: #d4edda;
-    color: #155724;
-    border-radius: 4px;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 1rem;
+.stTabs [data-baseweb="tab-panel"] {
+  background-color: var(--card-bg);
+  border-radius: 0 var(--border-radius) var(--border-radius) var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
 }
 
-.prediction-rejected {
-    padding: 1rem;
-    background-color: #f8d7da;
-    color: #721c24;
-    border-radius: 4px;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 1rem;
+/* Card styling */
+.card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+  border-top: 4px solid transparent;
+  transition: transform 0.2s ease-in-out;
 }
 
-/* Metrics styling */
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card.primary-card {
+  border-top-color: var(--primary);
+}
+
+.card.success-card {
+  border-top-color: var(--success);
+}
+
+.card.warning-card {
+  border-top-color: var(--warning);
+}
+
+/* Metric containers */
 .metric-container {
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    text-align: center;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 4px solid var(--primary);
+  transition: all 0.3s ease;
+}
+
+.metric-container:hover {
+  transform: translateY(-5px);
 }
 
 .metric-label {
-    font-size: 0.9rem;
-    color: #6c757d;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
 }
 
 .metric-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #2c3e50;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
 }
 
-/* Custom tabs for visualizations */
-.viz-tab {
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    background-color: #f1f1f1;
-    border-radius: 4px 4px 0 0;
-    border: 1px solid #ddd;
-    border-bottom: none;
-    margin-right: 0.25rem;
+/* Feature item styling */
+.feature-item {
+  padding: 0.75rem 1rem;
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius);
+  margin-bottom: 0.75rem;
+  border-left: 4px solid var(--primary);
+  transition: all 0.2s ease;
 }
 
-.viz-tab.active {
-    background-color: white;
-    font-weight: 600;
+.feature-item:hover {
+  background-color: #d1e8fd;
+  transform: translateX(5px);
 }
 
-.tab-content {
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 0 4px 4px 4px;
+/* Input form styling */
+.column-container {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
 }
 
-/* Title banner */
-.title-banner {
-    background: linear-gradient(90deg, #3498db, #2c3e50);
-    padding: 1.5rem;
-    color: white;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    text-align: center;
+/* Select box styling */
+.stSelectbox [data-baseweb="select"] {
+  background-color: var(--card-bg);
 }
 
-/* For the model metrics */
-.model-metrics {
-    display: flex;
-    justify-content: space-around;
-    margin: 1rem 0;
+.stSelectbox [data-baseweb="select"] > div {
+  background-color: var(--card-bg);
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+/* Number input styling */
+.stNumberInput div input {
+  border-radius: 4px;
+}
+
+/* Button styling */
+.stButton > button {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 2rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.stButton > button:hover {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.stButton > button:active {
+  transform: translateY(1px);
+}
+
+/* Prediction result styling */
+.prediction-approved {
+  background: linear-gradient(135deg, var(--success-light), var(--success-light));
+  border-left: 5px solid var(--success);
+  color: var(--success);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow);
+}
+
+.prediction-approved h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.prediction-rejected {
+  background: linear-gradient(135deg, var(--danger-light), var(--danger-light));
+  border-left: 5px solid var(--danger);
+  color: var(--danger);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow);
+}
+
+.prediction-rejected h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Probability gauge styling */
+.probability-gauge {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+/* Explanation factors styling */
+.explanation-factor {
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 0.75rem;
+  background-color: var(--primary-light);
+  border-left: 4px solid var(--primary);
+}
+
+/* Chart container styling */
+.chart-container {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: var(--shadow);
 }
 
 /* Footer styling */
 .footer {
-    text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
-    color: #6c757d;
-    font-size: 0.85rem;
+  text-align: center;
+  padding: 2rem 0 1rem;
+  margin-top: 3rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Additional styling for visualization tabs */
+.viz-tab-content {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: var(--shadow);
+}
+
+/* Insights card styling */
+.insight-card {
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-left: 4px solid var(--primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .title-banner h1 {
+    font-size: 1.8rem;
+  }
+
+  .title-banner h2 {
+    font-size: 1.2rem;
+  }
+
+  .metric-value {
+    font-size: 1.5rem;
+  }
 }
