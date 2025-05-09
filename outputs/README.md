@@ -43,5 +43,6 @@
  - Libraries: pandas, numpy, sklearn, xgboost, matplotlib, seaborn, joblib, streamlit
 
  ## Team
- [REFUOE,SELLO,RAMONE,MOSOLOLI,HEQOA]
+ REFUOE,SELLO,RAMONE,MOSOLOLI,HEQOA]
+
  
