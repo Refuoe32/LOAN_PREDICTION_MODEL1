@@ -15,10 +15,10 @@
  1. **Data Cleaning**: Handled missing values using mode for categorical and median for numerical features; removed outliers with IQR method.
  2. **Preprocessing**: Created Total_Income feature, encoded categorical variables, scaled numerical features.
  3. **Data Splitting**: Randomly split into 80% training and 20% testing sets.
- 4. **Model**: Used XGBoost for its robustness and feature importance capabilities.
+ 4. **Model**: Used Logistic regression for its accurancy compared to other models.
  5. **Tuning**: Applied GridSearchCV to optimize hyperparameters.
  6. **Feature Importance**: Analyzed and ranked features to identify those most critical for loan approval.
- 7. **Dashboard**: Built a Streamlit-based dashboard with interactive visualizations and feature importance insights.
+ 7. **Dashboard**: Built a dashboard with interactive visualizations and feature importance insights and data visualisations.
 
  ## Files
  - `loan_prediction_model.py`: Main script for model training and dashboard
