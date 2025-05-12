@@ -33,14 +33,13 @@
 
  ## Usage
  1. Install dependencies: `pip install pandas numpy sklearn xgboost matplotlib seaborn joblib streamlit`
- 2. Run the script: `streamlit run loan_prediction_model.py`
- 3. Open the displayed URL in a browser to view the dashboard.
- 4. Use the trained model for predictions with `joblib.load('loan_prediction_model.pkl')`.
- 5. Inspect preprocessed datasets in `outputs/train_data_preprocessed.csv` and `outputs/test_data_preprocessed.csv`.
+ 2. Open the displayed URL in a browser to view the dashboard.
+ 3. Use the trained model for predictions with `joblib.load('loan_prediction_model.pkl')`.
+ 4. Inspect preprocessed datasets in `outputs/train_data_preprocessed.csv` and `outputs/test_data_preprocessed.csv`.
 
  ## Requirements
  - Python 3.8+
- - Libraries: pandas, numpy, sklearn, xgboost, matplotlib, seaborn, joblib, streamlit
+ - Libraries: pandas, numpy, sklearn, matplotlib, seaborn, joblib, streamlit
 
  ## Team
  REFUOE,SELLO,RAMONE,MOSOLOLI,HEQOA]
